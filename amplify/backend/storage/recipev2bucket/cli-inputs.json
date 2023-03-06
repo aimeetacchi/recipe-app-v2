@@ -1,0 +1,16 @@
+{
+  "resourceName": "recipev2bucket",
+  "policyUUID": "1820ce69",
+  "bucketName": "recipeappv2c096713a632e4fa4ba194d2bd63f94b2",
+  "storageAccess": "authAndGuest",
+  "guestAccess": [
+    "READ"
+  ],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ",
+    "DELETE"
+  ],
+  "triggerFunction": "NONE",
+  "groupAccess": {}
+}

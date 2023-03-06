@@ -1,7 +1,22 @@
-import { Link } from 'react-router-dom'
-import NavStyles from './styles'
+import { Link, useLocation } from 'react-router-dom'
 
-const Nav = () => {
+import { NavStyles } from './styles';
+
+interface NavProps {
+  // openSearchRecipe: () => void;
+  // authState: string;
+  signOut: () => void;
+}
+
+const Nav = (props: NavProps) => {
+  const { signOut } = props;
+
+  const { pathname } = useLocation();
+
+  // const openSearchBox = () => {
+  //   openSearchRecipe();
+  // }
+
   return (
     <NavStyles>
       <ul className='nav-list'>
@@ -9,12 +24,15 @@ const Nav = () => {
           <Link to='/'>Home</Link>
         </li>
         <li className='nav-list__item'>
-          <Link to='/'>Nav item 2</Link>
+          <Link to='/about'>About</Link>
         </li>
-
-        <li className='nav-list__item'>
-          <Link to='/'>Nav Item 3</Link>
-        </li>
+        {/* { pathname === '/' &&
+          (<li className='nav-list__item search'><span onClick={() => openSearchBox()}>Search Recipe...</span></li>)
+        } */}
+        {/* <li className='nav-list__item nav-list__item--sign'>
+          { authState === 'signedin' ? (<span className="signout" onClick={signOut}>Sign out</span>) : (<Link to='/signin'>Sign In</Link>)}
+        </li> */}
+        
       </ul>
     </NavStyles>
   )

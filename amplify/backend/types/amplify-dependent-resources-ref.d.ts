@@ -15,5 +15,11 @@ export type AmplifyDependentResourcesAttributes = {
       "UserPoolId": "string",
       "UserPoolName": "string"
     }
+  },
+  "storage": {
+    "recipev2bucket": {
+      "BucketName": "string",
+      "Region": "string"
+    }
   }
 }

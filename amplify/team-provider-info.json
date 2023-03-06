@@ -17,6 +17,12 @@
       },
       "api": {
         "recipeappv2": {}
+      },
+      "hosting": {
+        "amplifyhosting": {}
+      },
+      "storage": {
+        "recipev2bucket": {}
       }
     }
   }
