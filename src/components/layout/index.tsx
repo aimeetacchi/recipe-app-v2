@@ -1,7 +1,7 @@
 // components/Layout.js
 import React from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
-import { useAuthenticator, Button, Heading, View } from '@aws-amplify/ui-react';
+import { useAuthenticator, Button, View } from '@aws-amplify/ui-react';
 
 const Layout = () => {
   const { route, signOut } = useAuthenticator((context) => [
@@ -16,9 +16,9 @@ const Layout = () => {
   }
   return (
     <>
-      <nav>
+      <nav className="font-lato">
         <Button onClick={() => navigate('/')}>Home</Button>
-        <Button onClick={() => navigate('/protected')}>
+        <Button onClick={() => navigate('/create-recipe')}>
           Add Recipe
         </Button>
 
@@ -28,9 +28,9 @@ const Layout = () => {
           <Button onClick={() => logOut()}>Logout</Button>
         )}
       </nav>
-      <Heading level={1}>Recipe App Version 2</Heading>
+      <h1 className="font-lato text-4xl">Recipe App Version 2</h1>
       <View>
-        {route === 'authenticated' ? 'You are logged in!' : 'Please Login!'}
+        {route === 'authenticated' ? '' : 'Please Login!'}
       </View>
 
       <Outlet />

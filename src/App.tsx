@@ -32,7 +32,7 @@ const MyRoutes = () => {
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
           <Route
-            path="/protected"
+            path="/create-recipe"
             element={
               <RequireAuth>
                 <CreateRecipe />
@@ -57,8 +57,12 @@ const App = () => {
       // this call will send a request to Cognito to get the latest user data
       bypassCache: false
     })
-      .then((user) => console.log(user))
-      .catch((err) => console.log(err));
+      .then((user: any) => {
+        // console.log(user)
+      })
+      .catch((err: any) => {
+        console.log(err) 
+      });
 
   const getData = async () => {
     // Getting the Data from AWS - IAM unauth way
@@ -68,14 +72,12 @@ const App = () => {
   }) as GraphQLResult<ListRecipesQuery>;
 
     const data = recipesData?.data?.listRecipes?.items
-    console.log('recipes', recipesData);
+    // console.log('recipes', recipesData);
     setUpdatedRecipes(data);
   }
 
   useEffect(() => {
-
     getData()
-
   }, []);
 
   return (

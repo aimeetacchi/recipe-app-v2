@@ -1,17 +1,22 @@
 import { useEffect, useState } from 'react'
-// import { Formik, Field, Form, ErrorMessage } from 'formik';
 import awsExports from '../../aws-exports'
-import { Storage } from 'aws-amplify'
-// import * as Yup from "yup";
+// import { Storage } from 'aws-amplify'
+import { useForm } from 'react-hook-form';
 
 // import { addRecipe } from '../../actions/AddRecipe'
 // import { useDispatch } from 'react-redux'
 
 const AddRecipeForm = () => {
+    const { register, handleSubmit, formState: { errors } } = useForm();
+    const onSubmit = (data: any) => {
+        console.log(data);
+    } 
+    console.log(errors);
     // const dispatch = useDispatch();
     // const [imageValue, setImageValue] = useState();
 
     // const [recipe, setRecipeState] = useState();
+
 
 //    const addRecipeImage = async (values: any) => {
 //        const {name, description, difficulty, prepTime, cookingTime, serves } = values;
@@ -50,151 +55,44 @@ const AddRecipeForm = () => {
     //     }
     // }, [recipe])
 
+
     return (
-        <>
-            FORM
-        </>
-    //     <Formik
-    //         initialValues={{ 
-    //             name: "",
-    //             description: "",
-    //             difficulty: "",
-    //             serves: "",
-    //             prepTime: "",
-    //             cookingTime: "",
-    //             file: ""
-    //         }}
-    //         validationSchema={Yup.object().shape({
-    //             name: Yup.string()
-    //             .required("Recipe name is required")
-    //         })}
-    //         onSubmit={values => {
-    //             // call Add Image Storage API and Store Values in State ===
-    //             addRecipeImage(values)                
-    //         }}
-    //     >
-    //     {props => {
-    //       const {
-    //         // values,
-    //         touched,
-    //         errors,
-    //         dirty,
-    //         isSubmitting,
-    //         // handleChange,
-    //         // handleBlur,
-    //         handleSubmit,
-    //         handleReset
-    //       } = props;
-    //       return (
-    //         <Form onSubmit={handleSubmit}>
-    //             <div>
-    //                 <label htmlFor="name" style={{ display: "block" }}>
-    //                 Recipe Name
-    //                 </label>
-    //                 <Field
-    //                     id="name"
-    //                     placeholder="Enter Recipe Name"
-    //                     name="name"
-    //                     type="text"
-    //                     className={'form-control' + (errors.name && touched.name ? ' is-invalid' : '')}
-    //                 />
-    //                 <ErrorMessage name="name" component="div" className="invalid-feedback" />
-    //             </div>
+        <div className="form-container">
+            <form className="block text-black font-opensans" onSubmit={handleSubmit(onSubmit)}>
 
-    //             <div>
-    //                 <label htmlFor="description" style={{ display: "block" }}>
-    //                 Instructions on how to make
-    //                 </label>
-    //                 <Field
-    //                     id="description"
-    //                     placeholder="Enter Instructions on how to make"
-    //                     name="description"
-    //                     type="text"
-    //                     className={'form-control' + (errors.description && touched.description ? ' is-invalid' : '')}
-    //                 />
-    //                 <ErrorMessage name="description" component="div" className="invalid-feedback" />
-    //             </div>
+                <div className="">
+                    <label className="text-blue-900" htmlFor="name">Recipe Name</label>
+                    <input className="block w-full rounded border border-blue-700 text-black" id="name" type="text" placeholder="Chicken Curry" {...register("Recipe Name", {required: true, min: 3, maxLength: 40})} />
+                </div>
+              
+                <div className="">
+                    <label className="text-blue-900" htmlFor="name">Instructions</label>
+                    <textarea className="block h-40 w-full rounded border border-blue-700 text-black" {...register("Instructions (on how to make)", {required: true, min: 10, maxLength: 100})} />
+                </div>
 
-    //             <div>
-    //             <input
-    //                 type="file"
-    //                 name="image"
-    //                 onChange={(event) => {
-    //                 setImageValue(event.currentTarget.files[0]);
-    //                 }}
-    //                 />
-    //             </div>
+                <div className="">
+                    <label className="text-blue-900" htmlFor="name">Difficulty</label>
+                    <input className="block w-full rounded border border-blue-700" type="text" placeholder="Difficulty" {...register("Difficulty", {required: true})} />
+                </div>
 
-    //             <div>
-    //                 <label htmlFor="difficulty" style={{ display: "block" }}>
-    //                 Difficulty
-    //                 </label>
-    //                 <Field
-    //                     id="difficulty"
-    //                     placeholder="Easy, Medium or Hard"
-    //                     name="difficulty"
-    //                     type="text"
-    //                     className={'form-control' + (errors.difficulty && touched.difficulty ? ' is-invalid' : '')}
-    //                 />
-    //                 <ErrorMessage name="difficulty" component="div" className="invalid-feedback" />
-    //             </div>
+                <div className="">
+                    <label className="text-blue-900" htmlFor="name">Prep Time (add number)</label>
+                    <input className="block w-full rounded border border-blue-700" type="text" placeholder="15" {...register("Prep Time", {required: true, maxLength: 2})} />
+                </div>
 
-    //             <div>
-    //                 <label htmlFor="prepTime" style={{ display: "block" }}>
-    //                     Prep Time
-    //                 </label>
-    //                 <Field
-    //                     id="prepTime"
-    //                     placeholder="Add a number of mins - 5"
-    //                     name="prepTime"
-    //                     type="text"
-    //                     className={'form-control' + (errors.prepTime && touched.prepTime ? ' is-invalid' : '')}
-    //                 />
-    //                 <ErrorMessage name="prepTime" component="div" className="invalid-feedback" />
-    //             </div>
+                <div className="">
+                    <label className="text-blue-900" htmlFor="name">Cooking Time (add number)</label>
+                    <input className="block w-full rounded border border-blue-700" type="text" placeholder="30" {...register("Cooking Time", {required: true, maxLength: 3})} />
+                </div>
 
-    //             <div>
-    //                 <label htmlFor="cookingTime" style={{ display: "block" }}>
-    //                     Cooking Time
-    //                 </label>
-    //                 <Field
-    //                     id="cookingTime"
-    //                     placeholder="Add a number of mins - 5"
-    //                     name="cookingTime"
-    //                     type="text"
-    //                     className={'form-control' + (errors.cookingTime && touched.cookingTime ? ' is-invalid' : '')}
-    //                 />
-    //                 <ErrorMessage name="cookingTime" component="div" className="invalid-feedback" />
-    //             </div>
+                <div className="">
+                    <label className="text-blue-900" htmlFor="name">Serves (add number)</label>
+                    <input className="block w-full rounded border border-blue-700" type="text" placeholder="2" {...register("Serves", {})} />
+                </div>
 
-    //             <div>
-    //                 <label htmlFor="serves" style={{ display: "block" }}>
-    //                     Serves
-    //                 </label>
-    //                 <Field
-    //                     id="serves"
-    //                     placeholder="Add a number"
-    //                     name="serves"
-    //                     type="text"
-    //                     className={'form-control' + (errors.serves && touched.serves ? ' is-invalid' : '')}
-    //                 />
-    //                 <ErrorMessage name="serves" component="div" className="invalid-feedback" />
-    //             </div>
-
-    //             <button
-    //                 type="button"
-    //                 className="outline"
-    //                 onClick={handleReset}
-    //                 disabled={!dirty || isSubmitting}
-    //             >Reset</button>
-
-    //             <button type="submit" disabled={isSubmitting}>
-    //             Add Recipe
-    //             </button>
-    //         </Form>
-    //       );
-    //     }}
-    //   </Formik>
+                <input className="border border-blue-600 p-3 bg-blue-500" type="submit" />
+            </form>
+        </div>
     )
    
 }
