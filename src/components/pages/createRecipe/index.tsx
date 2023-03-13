@@ -9,7 +9,7 @@ const CreateRecipe = () => {
     const message = authStatus === 'authenticated' ? 'Create Recipe' : 'Loading...';
     return (
         <div className="create-recipe w-2/5 mx-auto">
-            <h2 className="font-lato text-3xl">{message}</h2>
+            <h2 className="mt-4 font-lato text-2xl">{message}</h2>
             <AddRecipeForm/>
         </div>
     )

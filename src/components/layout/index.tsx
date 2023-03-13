@@ -16,7 +16,7 @@ const Layout = () => {
   }
   return (
     <>
-      <nav className="font-lato">
+      <nav className="mt-2 flex justify-center font-lato">
         <Button onClick={() => navigate('/')}>Home</Button>
         <Button onClick={() => navigate('/create-recipe')}>
           Add Recipe
@@ -28,7 +28,7 @@ const Layout = () => {
           <Button onClick={() => logOut()}>Logout</Button>
         )}
       </nav>
-      <h1 className="font-lato text-4xl">Recipe App Version 2</h1>
+      <h1 className="font-lato text-center text-4xl">Recipe App Version 2</h1>
       <View>
         {route === 'authenticated' ? '' : 'Please Login!'}
       </View>
