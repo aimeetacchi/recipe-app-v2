@@ -17,16 +17,16 @@ const AddRecipeForm = () => {
         addRecipeImage(data)
     } 
     // console.log(errors);
-    // const dispatch = useDispatch();
-    const [imageValue, setImageValue] = useState<any>({})
+ 
+    const [file, setFile] = useState<any | null>(null);
     const [recipe, setRecipeState] = useState<any>();
 
 
    const addRecipeImage = async (values: any) => {
        const {name, description, difficulty, prepTime, cookingTime, serves, ingredients } = values;
-       console.log(imageValue)
+       console.log(file)
         try {
-            const result = await Storage.put(imageValue.name, imageValue, {
+            const result = await Storage.put(file.name, file, {
                 contentType: 'image/jpg'
             })
 
@@ -56,7 +56,6 @@ const AddRecipeForm = () => {
 
     const addRecipe = async () => {
         // Adding the Data from AWS
-        debugger;
         const res = await API.graphql(graphqlOperation(createRecipe, {input: recipe}));
 
         // const res = await API.graphql({
@@ -105,9 +104,11 @@ const AddRecipeForm = () => {
                         control={control}
                         // rules={{ required: true }}
                         render={({ field }) => (
+                            <div>
                             <Dropzone onDrop={(acceptedFiles) => {
                                 field.onChange(acceptedFiles[0])
-                                setImageValue(acceptedFiles[0])
+                                console.log('acceptedFiles', acceptedFiles[0])
+                                setFile(acceptedFiles[0])
                             }}>
                             {({ getRootProps, getInputProps }) => (
                                 <div className="h-40" {...getRootProps()}>
@@ -116,6 +117,13 @@ const AddRecipeForm = () => {
                                 </div>
                             )}
                             </Dropzone>
+                            {file && (
+                                <div>
+                                <h4>Thumbnail:</h4>
+                                <img src={URL.createObjectURL(file)} alt={file.name} />
+                                </div>
+                            )}
+                            </div>
                         )}
                     />
                 </div>

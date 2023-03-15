@@ -18,9 +18,11 @@ const Layout = () => {
     <>
       <nav className="mt-2 flex justify-center font-lato">
         <Button onClick={() => navigate('/')}>Home</Button>
-        <Button onClick={() => navigate('/create-recipe')}>
-          Add Recipe
-        </Button>
+        {route === 'authenticated' && (
+          <Button onClick={() => navigate('/create-recipe')}>
+            Add Recipe
+          </Button>
+        )}
 
         {route !== 'authenticated' ? (
           <Button onClick={() => navigate('/login')}>Login</Button>
@@ -28,10 +30,13 @@ const Layout = () => {
           <Button onClick={() => logOut()}>Logout</Button>
         )}
       </nav>
+      {/* <View>
+        <p className="text-center">
+          {route === 'authenticated' ? '' : 'You are not Logged in'}
+        </p>
+      </View> */}
       <h1 className="font-lato text-center text-4xl">Recipe App Version 2</h1>
-      <View>
-        {route === 'authenticated' ? '' : 'Please Login!'}
-      </View>
+    
 
       <Outlet />
     </>

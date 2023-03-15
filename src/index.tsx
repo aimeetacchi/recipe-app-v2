@@ -6,6 +6,7 @@ import App from './App';
 
 import { Amplify } from "aws-amplify";
 import awsExports from "./aws-exports";
+import { AppContextProvider } from './state';
 
 Amplify.configure(awsExports);
 
@@ -14,6 +15,8 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <App />
+    <AppContextProvider> 
+      <App />
+    </AppContextProvider>
   </React.StrictMode>
 );

@@ -1,4 +1,4 @@
-import { useEffect, useState, createContext } from 'react';
+import { useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 import { ApolloProvider } from '@apollo/client';
@@ -19,10 +19,7 @@ import Layout from './components/layout';
 
 import { client } from './graphql/client';
 import { listRecipes } from './graphql/queries';
-
-
-const recipes = [] as any
-export const RecipeContext = createContext({recipes});
+import { SET_RECIPES, useAppContext } from './state';
 
 
 const MyRoutes = () => {
@@ -47,8 +44,8 @@ const MyRoutes = () => {
 }
 
 
-const App = () => {
-  const [updatedRecipes, setUpdatedRecipes] = useState(recipes);
+const App = () => {;
+  const { dispatch } = useAppContext();
 
   // const navigate = useNavigate();
 
@@ -64,16 +61,20 @@ const App = () => {
         console.log(err) 
       });
 
-  const getData = async () => {
-    // Getting the Data from AWS - IAM unauth way
-    const recipesData = await API.graphql({
-    query: listRecipes,
-    authMode: 'AWS_IAM'
-  }) as GraphQLResult<ListRecipesQuery>;
+    const getData = async () => {
+      // Getting the Data from AWS - IAM unauth way
+      const recipesData = await API.graphql({
+      query: listRecipes,
+      authMode: 'AWS_IAM'
+    }) as GraphQLResult<ListRecipesQuery>;
 
     const data = recipesData?.data?.listRecipes?.items
-    // console.log('recipes', recipesData);
-    setUpdatedRecipes(data);
+
+    // setting data in store
+    dispatch({
+        type: SET_RECIPES,
+        recipes: data,
+    });
   }
 
   useEffect(() => {
@@ -81,17 +82,13 @@ const App = () => {
   }, []);
 
   return (
-
-        <RecipeContext.Provider value={{recipes: updatedRecipes}}>
-        <ApolloProvider client={client}>
-      
-          <div className="app-boilerplate">
-              <Authenticator.Provider>
-                <MyRoutes/>
-              </Authenticator.Provider>
-          </div>
-        </ApolloProvider>
-        </RecipeContext.Provider>
+      <ApolloProvider client={client}>
+        <div className="app-boilerplate">
+            <Authenticator.Provider>
+              <MyRoutes/>
+            </Authenticator.Provider>
+        </div>
+      </ApolloProvider>
   );
 }
 
