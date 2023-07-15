@@ -35,7 +35,7 @@ const Layout = () => {
           {route === 'authenticated' ? '' : 'You are not Logged in'}
         </p>
       </View> */}
-      <h1 className="font-lato text-center text-4xl">Recipe App Version 2</h1>
+      <h1 className="font-lato text-center text-4xl my-5">The Recipe Repository</h1>
     
 
       <Outlet />

@@ -17,8 +17,8 @@ const Home = () => {
                         <>
                             <Heading level={3}>Recipes</Heading>
                             <div className="mt-5 md:flex md:gap-5">
-                                {recipes.map((recipe: Recipe) => (
-                                    <Card recipe={recipe}/>
+                                {recipes.map((recipe: Recipe, index:number) => (
+                                    <Card key={index} recipe={recipe}/>
                                 ))}
                             </div>
                            
