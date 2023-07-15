@@ -1,7 +1,4 @@
-import { Recipe,  } from '../../API'
 import CardStyles from './styles'
-
-
 
 const Card = ({recipe}: any) => {
   const { name, instructions, file, difficulty, serves, cookingTime, prepTime} = recipe;

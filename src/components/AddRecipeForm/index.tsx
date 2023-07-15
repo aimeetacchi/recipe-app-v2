@@ -12,11 +12,10 @@ import { CreateRecipeInput } from '../../API';
 // import { useDispatch } from 'react-redux'
 
 const AddRecipeForm = () => {
-    const { register,  control, handleSubmit, formState: { errors } } = useForm();
+    const { register,  control, handleSubmit } = useForm();
     const onSubmit = (data: any) => {
         addRecipeImage(data)
-    } 
-    // console.log(errors);
+    }
  
     const [file, setFile] = useState<any | null>(null);
     const [recipe, setRecipeState] = useState<any>();

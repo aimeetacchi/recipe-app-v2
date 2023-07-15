@@ -16,7 +16,7 @@ const Home = () => {
                     recipes.length > 0 ? (
                         <>
                             <Heading level={3}>Recipes</Heading>
-                            <div className="md:flex md:gap-5">
+                            <div className="mt-5 md:flex md:gap-5">
                                 {recipes.map((recipe: Recipe) => (
                                     <Card recipe={recipe}/>
                                 ))}

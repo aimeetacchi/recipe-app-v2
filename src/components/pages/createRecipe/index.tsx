@@ -1,5 +1,4 @@
-// components/CreateRecipe.js
-import { useAuthenticator, Heading } from '@aws-amplify/ui-react';
+import { useAuthenticator } from '@aws-amplify/ui-react';
 import AddRecipeForm from '../../AddRecipeForm';
 
 const CreateRecipe = () => {
