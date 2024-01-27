@@ -3,16 +3,14 @@ import awsExports from '../../aws-exports'
 import { API, graphqlOperation, Storage } from 'aws-amplify'
 import { GraphQLResult } from '@aws-amplify/api';
 import Dropzone from 'react-dropzone';
-import 'react-dropzone-uploader/dist/styles.css';
 import { useForm, Controller  } from 'react-hook-form';
 import { createRecipe } from '../../graphql/mutations';
 import { CreateRecipeInput } from '../../API';
-
-// import { addRecipe } from '../../actions/AddRecipe'
-// import { useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom';
 
 const AddRecipeForm = () => {
     const { register,  control, handleSubmit } = useForm();
+    const navigate = useNavigate();
     const onSubmit = (data: any) => {
         addRecipeImage(data)
     }
@@ -56,21 +54,14 @@ const AddRecipeForm = () => {
     const addRecipe = async () => {
         // Adding the Data from AWS
         const res = await API.graphql(graphqlOperation(createRecipe, {input: recipe}));
-
-        // const res = await API.graphql({
-        //     query: createRecipe,
-        //     variables: {input: recipe},
-        //     authMode: 'AWS_IAM',
-        // });
         const data = (res as GraphQLResult<CreateRecipeInput>).data;
         console.log(data);
-
+        navigate('/');
     }
 
     useEffect(() => {
         if(recipe){
             console.log('Calling add recipe...', recipe)
-            // dispatch(addRecipe(recipe))
             addRecipe()
         }
     // eslint-disable-next-line react-hooks/exhaustive-deps

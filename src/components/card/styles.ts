@@ -3,9 +3,12 @@ import styled from "styled-components";
 const CardStyles = styled.div`
     margin-bottom: 20px;
         /* Desktop */
-        @media (min-width: 720px) {
-            width: 33.33%;
+        @media (min-width: 768px) {
+            width: 45%;
             margin-bottom: 0;
+        }
+        @media (min-width: 1300px) {
+            width: 31%;
         }
     .card {
         box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
