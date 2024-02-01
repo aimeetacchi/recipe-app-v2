@@ -2,7 +2,7 @@
   "version": "1",
   "cognitoConfig": {
     "identityPoolName": "recipeappv2d23fa79c_identitypool_d23fa79c",
-    "allowUnauthenticatedIdentities": true,
+    "allowUnauthenticatedIdentities": false,
     "resourceNameTruncated": "reciped23fa79c",
     "userPoolName": "recipeappv2d23fa79c_userpool_d23fa79c",
     "autoVerifiedAttributes": [
@@ -24,7 +24,7 @@
     ],
     "aliasAttributes": [],
     "userpoolClientGenerateSecret": false,
-    "userpoolClientRefreshTokenValidity": "90",
+    "userpoolClientRefreshTokenValidity": 30,
     "userpoolClientWriteAttributes": [
       "email"
     ],
@@ -36,7 +36,7 @@
     "sharedId": "d23fa79c",
     "resourceName": "recipeappv2d23fa79c",
     "authSelections": "identityPoolAndUserPool",
-    "useDefault": "manual",
+    "useDefault": "defaultSocial",
     "usernameAttributes": [
       "email"
     ],
@@ -59,14 +59,20 @@
     },
     "breakCircularDependency": true,
     "dependsOn": [],
-    "thirdPartyAuth": false,
     "userPoolGroups": false,
     "adminQueries": false,
-    "hostedUI": false,
-    "authProviders": [],
+    "hostedUI": true,
     "parentStack": {
       "Ref": "AWS::StackId"
     },
-    "permissions": []
+    "permissions": [],
+    "hostedUIDomainName": "recipeappv2de1afc41-de1afc41",
+    "authProvidersUserPool": [
+      "Facebook",
+      "Google"
+    ],
+    "hostedUIProviderMeta": "[{\"ProviderName\":\"Facebook\",\"authorize_scopes\":\"email,public_profile\",\"AttributeMapping\":{\"email\":\"email\",\"username\":\"id\"}},{\"ProviderName\":\"Google\",\"authorize_scopes\":\"openid email profile\",\"AttributeMapping\":{\"email\":\"email\",\"username\":\"sub\"}}]",
+    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"http://localhost:5173/\"],\"LogoutURLs\":[\"http://localhost:5173/\"]}",
+    "authProviders": []
   }
 }
